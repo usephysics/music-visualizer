@@ -1,0 +1,33 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.control-panel {
+    background-color: #324475;
+}
+
+.panel-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+}
+
+#file {
+	width: 0.1px;
+	height: 0.1px;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+#file-name {
+    color: black;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+    padding: 5px 15px;
+    background-color: #912121;
+    border: 2px solid black;
+}

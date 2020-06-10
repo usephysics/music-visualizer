@@ -1,0 +1,15 @@
+.container-fluid {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* background is initially just a colour */
+.default { 
+    background-image: url('../backgrounds/default.jpeg');
+}
+
+/* will have about 25 available backgrounds as gifs. naming convention will simply be "bg" + n" */
+.bg1 {
+    background-image: url('../backgrounds/test.gif');
+}
