@@ -6,25 +6,25 @@ export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            background: 'default',
+            background: 1,
         }
     }
 
     changeBackground = bg => {
         this.setState({
-            background: `bg${bg}`,
+            background: bg,
         });
     }
 
     render() {
         return (
-            <div className={"container-fluid " + this.state.background}>
+            <div className={"container-fluid " + `bg${this.state.background}`}>
                 <div className="text-center py-4 mb-3">
-                    <p className="display-4 text-dark">Music Visualizer {/* placeholder name */}</p>
+                    <p className="display-3 text-dark title">Music Visualizer {/* placeholder name */}</p>
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-9 mt-2">
-                        <ControlPanel/>
+                        <ControlPanel changeBackground={this.changeBackground}/>
                     </div>
                 </div>
             </div>

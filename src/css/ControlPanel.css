@@ -4,6 +4,7 @@
 
 .control-panel {
     background-color: #324475;
+    border: 2px solid black;
 }
 
 .panel-text {
