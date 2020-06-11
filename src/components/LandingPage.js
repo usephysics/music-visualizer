@@ -23,8 +23,8 @@ export default class LandingPage extends React.Component {
                     <p className="display-3 text-dark title">Music Visualizer {/* placeholder name */}</p>
                 </div>
                 <div className="row justify-content-center">
-                    <div className="col-9 mt-2">
-                        <ControlPanel changeBackground={this.changeBackground}/>
+                <div className="col-9 mt-2">
+                        <ControlPanel changeBackground={this.changeBackground} num={this.state.background}/>
                     </div>
                 </div>
             </div>

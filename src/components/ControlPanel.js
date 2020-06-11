@@ -17,16 +17,18 @@ export default class ControlPanel extends React.Component {
         return (
             <div className="card control-panel">
                 <div className="card-body text-center">
-                    <div className="panel-text mb-4">
-                        Upload a song (mp3)
+                    <div className="panel-text mb-2">
+                        Upload a song
                     </div>
                     <input type="file" name="file" id="file" accept="audio/*" onChange={this.upload}/>
                     <label for="file">Upload</label>
                     <p id="file-name"></p>
-                    <div className="panel-text mt-5 mb-5">
+                    <div className="panel-text mt-2 mb-5">
                         Background and effects
                     </div>
                     {/* CAROUSEL */}
+                    <button className="btn btn-primary btn-lg" onClick={() => 
+                    this.props.changeBackground(this.props.num + 1)}>Click Me</button>
                 </div>
             </div>
         );
