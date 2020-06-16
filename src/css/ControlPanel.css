@@ -34,3 +34,7 @@ label {
     background-color: #912121;
     border: 2px solid black;
 }
+
+.carousel {
+    width: 50%;
+}

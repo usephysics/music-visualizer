@@ -1,12 +1,11 @@
 import React from 'react';
+import Slider from 'react-slick';
+import BgChoice from './BgChoice.js';
 import '../css/ControlPanel.css';
 
 export default class ControlPanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            song: '',
-        }
     }
 
     upload = () => {
@@ -14,6 +13,12 @@ export default class ControlPanel extends React.Component {
     }
 
     render() {
+        const settings = {
+            infinite: true,
+            speed: 1000,
+            slidesToShow: 3,
+            slidesToScroll: 3
+          };
         return (
             <div className="card control-panel">
                 <div className="card-body text-center">
@@ -26,9 +31,14 @@ export default class ControlPanel extends React.Component {
                     <div className="panel-text mt-2 mb-5">
                         Background and effects
                     </div>
-                    {/* CAROUSEL */}
-                    <button className="btn btn-primary btn-lg" onClick={() => 
-                    this.props.changeBackground(this.props.num + 1)}>Click Me</button>
+                    <div className="carousel mx-auto">
+                        <Slider {...settings}>
+                            {Array(6).fill(0).map((e,i)=>i+1).map(num =>
+                                <BgChoice num={num} active={this.props.active} 
+                                changeBackground={this.props.changeBackground}/>
+                            )}
+                        </Slider>
+                    </div>
                 </div>
             </div>
         );
