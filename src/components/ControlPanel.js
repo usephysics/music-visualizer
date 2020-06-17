@@ -17,7 +17,7 @@ export default class ControlPanel extends React.Component {
             infinite: true,
             speed: 1000,
             slidesToShow: 3,
-            slidesToScroll: 3
+            slidesToScroll: 3,
           };
         return (
             <div className="card control-panel">
@@ -28,7 +28,7 @@ export default class ControlPanel extends React.Component {
                     <input type="file" name="file" id="file" accept="audio/*" onChange={this.upload}/>
                     <label for="file">Upload</label>
                     <p id="file-name"></p>
-                    <div className="panel-text mt-2 mb-5">
+                    <div className="panel-text mt-2 mb-3">
                         Background and effects
                     </div>
                     <div className="carousel mx-auto">
