@@ -27,7 +27,7 @@ export default class Bar extends React.Component {
             <div className="bar" style={{
                 height: this.state.height+"%", 
                 transition: "all " + this.state.transition + "ms ease",
-                background: "rgba(255,255,255," + this.state.opacity + ")"
+                background: "rgba(" + this.props.rgb + "," + this.state.opacity + ")"
             }}></div>
         )
     }
