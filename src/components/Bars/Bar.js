@@ -9,24 +9,12 @@ export default class Bar extends React.Component {
         }
     }
 
-    componentDidMount() {
-        setInterval(async () => {
-            if (Math.random() > 0.5) {
-                this.setState({
-                    height: (Math.random() * this.props.varHeight) + this.props.minHeight,
-                    transition: (Math.random() * this.props.speed) + this.props.speed,
-                    opacity: Math.random() > 0.9 ? Math.random() * 0.20 + 0.30 : this.state.opacity
-                })
-            }
-          }, Math.floor(this.props.speed / 2));
-    }
-
     render() {
         return(
             <div className="bar" style={{
-                height: this.state.height+"%", 
+                height: this.props.height+"%", 
                 transition: "all " + this.state.transition + "ms ease",
-                background: "rgba(" + this.props.rgb + "," + this.state.opacity + ")"
+                background: "rgba(" + this.props.rgb + ", 0.5)"
             }}></div>
         )
     }

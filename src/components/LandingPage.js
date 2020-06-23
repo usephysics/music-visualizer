@@ -9,6 +9,7 @@ export default class LandingPage extends React.Component {
         this.state = {
             active: 1,
             uploaded: false,
+            isShaking: false
         }
     }
 
@@ -27,17 +28,19 @@ export default class LandingPage extends React.Component {
     render() {
         return (
             <div className={"container-fluid bg" + `${this.state.active}`}>
-                <div className="text-center py-4 mb-3">
-                    <p className="display-3 text-dark title">Music Visualizer</p>
-                </div> 
-                <div className="row justify-content-center">
-                    <div className="col-6 mt-2">
-                        <ControlPanel changeBackground={this.changeBackground} active={this.state.active}
-                        uploadSong={this.uploadSong}/>
+                <div style={{height:"100vh"}} className={this.state.isShaking ? " shake" : ""}>
+                    <div className="text-center py-4 mb-3">
+                        <p className="display-3 text-dark title">Music Visualizer</p>
+                    </div> 
+                    <div className="row justify-content-center">
+                        <div className="col-6 mt-2">
+                            <ControlPanel changeBackground={this.changeBackground} active={this.state.active}
+                            uploadSong={this.uploadSong}/>
+                        </div>
                     </div>
-                </div>
-                <div className="row">
-                    {this.state.uploaded ? <Visualizer></Visualizer> : ""}
+                    <div className="row">
+                        {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}/> : ""}
+                    </div>
                 </div>
             </div>
         );

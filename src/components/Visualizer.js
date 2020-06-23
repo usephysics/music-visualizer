@@ -16,16 +16,18 @@ export default class Visualizer extends React.Component {
         const audioSourceNode = audioCtx.createMediaElementSource(song);
         audioSourceNode.connect(analyserNode);
         analyserNode.connect(audioCtx.destination);
-        this.state = {analyser: analyserNode, dataArray: dataArr, color: "255,255,255"}
+        this.state = {analyser: analyserNode, dataArray: dataArr, shake: false}
     }
 
     updateDA = () => {
         let analyser = this.state.analyser;
         let dataArr = this.state.dataArray;
         analyser.getByteFrequencyData(dataArr);
-        console.log(dataArr);
-        this.setState({analyser: analyser, dataArray: dataArr, color: 
-            dataArr.subarray(4,8).reduce((total, next) => total += next)/4 > 210 ? "150,255,255" : "255,255,255"});
+        this.props.setShaking(dataArr.subarray(4,8).reduce((total, next) => total += next)/4 > 210); //enable/disable shaking animation
+        this.setState({
+            analyser: analyser, 
+            dataArray: dataArr, 
+        });
     }
 
     componentDidMount(){
@@ -37,7 +39,7 @@ export default class Visualizer extends React.Component {
             <div className="bars">
                 <div className="hidden-bar"></div>
                 {[...Array(32)].map((e, i) => {
-                    return <Bar minHeight={this.state.dataArray[i*i]/2.56} varHeight={0} speed={200} rgb={this.state.color}/>
+                    return <Bar height={this.state.dataArray[i*i]/2.56} varHeight={0} speed={200} rgb={this.state.color}/>
                 })}
             </div>
         );

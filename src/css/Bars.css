@@ -22,4 +22,23 @@
     position: relative;
     bottom: 0;
     display: inline-block;
+    transition: all 100ms ease;
 }
+
+.shake {
+    animation: shake 100ms linear both;
+  }
+  
+  @keyframes shake {
+    0% {
+      transform: rotate(0deg);
+    }
+    
+    35%{
+      transform: rotate(2deg);
+    }
+  
+    75% {
+      transform: rotate(-2deg);
+    }
+  }
