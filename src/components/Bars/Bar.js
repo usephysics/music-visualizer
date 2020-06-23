@@ -12,7 +12,6 @@ export default class Bar extends React.Component {
     componentDidMount() {
         setInterval(async () => {
             if (Math.random() > 0.5) {
-                let random = Math.random()
                 this.setState({
                     height: (Math.random() * this.props.varHeight) + this.props.minHeight,
                     transition: (Math.random() * this.props.speed) + this.props.speed,

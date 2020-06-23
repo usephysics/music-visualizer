@@ -1,12 +1,10 @@
 import React from 'react';
-import ControlPanel from './ControlPanel.js';
-import Bars from './Bars/Bars.js';
 import Bar from './Bars/Bar.js';
 
 export default class Visualizer extends React.Component {
     constructor(props) {
         super(props);
-        const freqRange = [20, 60, 250, 500, 2000, 4000, 6000, 20000]
+        const freqRange = [20, 60, 250, 500, 2000, 4000, 6000, 20000];
         const audioCtx = new AudioContext();
         const song = new Audio();
         song.src = '../files/T2.mp3';
@@ -39,7 +37,7 @@ export default class Visualizer extends React.Component {
             <div className="bars">
                 <div className="hidden-bar"></div>
                 {[...Array(32)].map((e, i) => {
-                    return <Bar minHeight={this.state.dataArray[i*i]/25.6} varHeight={0} speed={50} rgb={this.state.color}/>
+                    return <Bar minHeight={this.state.dataArray[i*i]/2.56} varHeight={0} speed={200} rgb={this.state.color}/>
                 })}
             </div>
         );
