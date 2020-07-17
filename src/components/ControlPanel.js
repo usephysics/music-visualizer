@@ -1,7 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
 import BgChoice from './BgChoice.js';
-/*import axios from 'axios';*/
 import '../css/ControlPanel.css';
 
 export default class ControlPanel extends React.Component {
@@ -13,18 +12,16 @@ export default class ControlPanel extends React.Component {
     }
 
     upload = () => {
-        /*
-        let payload = {headers: {'Content-Type': 'multipart/form-data'}, 
-                         data: {'file' : document.getElementById("file").files[0]}};
-        console.log(payload);
-        axios.post("http://localhost:3000/upload", payload, {}).then(res => console.log(res)).catch(rej => console.log(rej));
-        */
         document.getElementById("file-name").innerHTML = document.getElementById("file").files[0].name;
     }
 
     confirm = () => {
-        this.props.uploadSong();
-        this.props.toggleVisible();
+        if(document.getElementById("file").files.length == 1){
+            this.props.uploadSong();
+            this.props.toggleVisible();
+        }else{
+            alert("No file uploaded");
+        }
     }
 
     render() {
