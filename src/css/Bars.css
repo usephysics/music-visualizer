@@ -22,7 +22,7 @@
     position: relative;
     bottom: 0;
     display: inline-block;
-    transition: all 100ms ease;
+    transition: all 150ms ease;
 }
 
 .shake {

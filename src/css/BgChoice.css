@@ -2,7 +2,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     height: 100px;
-    width: 150px;
     margin: 0 auto;
     box-shadow: 0 0 5px #000;
 }
@@ -12,5 +11,5 @@
 }
 
 .active {
-    border: 2px solid yellow;
+    box-shadow: rgba(56,188,30, 0.2) 0 0 0 1000px inset;
 }

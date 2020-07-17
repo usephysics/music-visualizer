@@ -31,7 +31,7 @@ export default class Visualizer extends React.Component {
     }
 
     componentDidMount(){
-        setInterval(this.updateDA, 25);
+        setInterval(this.updateDA, 100);
     }
 
     render() {

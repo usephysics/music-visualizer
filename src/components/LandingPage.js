@@ -9,7 +9,8 @@ export default class LandingPage extends React.Component {
         this.state = {
             active: 1,
             uploaded: false,
-            isShaking: false
+            isShaking: false,
+            controlPanelVisible: true
         }
     }
 
@@ -29,19 +30,25 @@ export default class LandingPage extends React.Component {
         return (
             <div className={"container-fluid bg" + `${this.state.active}`}>
                 <div style={{height:"100vh"}} className={this.state.isShaking ? " shake" : ""}>
-                    <div className="text-center py-4 mb-3">
-                        <p className="display-3 text-dark title">Music Visualizer</p>
-                    </div> 
                     <div className="row justify-content-center">
                         <div className="col-6 mt-2">
-                            <ControlPanel changeBackground={this.changeBackground} active={this.state.active}
-                            uploadSong={this.uploadSong}/>
+                            <ControlPanel 
+                                visible={this.state.controlPanelVisible} t
+                                toggleVisible={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})} 
+                                changeBackground={this.changeBackground} active={this.state.active}
+                                uploadSong={this.uploadSong}
+                            />
                         </div>
                     </div>
                     <div className="row">
                         {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}/> : ""}
                     </div>
                 </div>
+
+                <div 
+                    className="show-control-panel-button" style={{display: (!this.state.controlPanelVisible ? "block" : "none")}}
+                    onClick={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})}
+                 />       
             </div>
         );
     }
