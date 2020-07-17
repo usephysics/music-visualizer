@@ -10,6 +10,8 @@
     margin-top: 25%;
     text-align: center;
     transition: 250ms ease all;
+    width: 700px;
+    margin: 25% auto 0 auto;
 }
 
 .control-panel-content {
