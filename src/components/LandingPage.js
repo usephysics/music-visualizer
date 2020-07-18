@@ -24,7 +24,7 @@ export default class LandingPage extends React.Component {
     uploadSong = () => {
         this.setState({
             uploaded: true,
-        })
+        });
     }
 
     enableShaking = toggle => {
@@ -37,6 +37,12 @@ export default class LandingPage extends React.Component {
                 shakeEnabled: false,
             })
         }
+    }
+
+    songEnded = () => {
+        this.setState({
+            controlPanelVisible: true,
+        })
     }
 
     render() {
@@ -53,9 +59,9 @@ export default class LandingPage extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}/> : ""}
+                        {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}
+                        songEnded={this.songEnded}/> : ""}
                     </div>
-
                 <div 
                     className="show-control-panel-button" style={{display: (!this.state.controlPanelVisible ? "block" : "none")}}
                     onClick={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})}

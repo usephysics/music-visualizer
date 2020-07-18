@@ -17,7 +17,7 @@ export default class ControlPanel extends React.Component {
     }
 
     confirm = () => {
-        if(document.getElementById("file").files.length === 1){
+        if(document.getElementById("file").files.length >= 1){
             this.props.uploadSong();
             this.props.toggleVisible();
             this.setState({
