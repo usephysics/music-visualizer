@@ -27,19 +27,18 @@
 
 .shake {
     animation: shake 200ms linear both infinite;
-  }
+}
   
-  @keyframes shake {
+@keyframes shake {
     0% {
-      transform: scale(1.00);
+        transform: scale(1.00);
     }
-    
+
     35%{
-      transform: scale(1.05);
+        transform: scale(1.05);
     }
 
     75%{
-      transform: scale(1.00);
+        transform: scale(1.00);
     }
-
-  }
+}

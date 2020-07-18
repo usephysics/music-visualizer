@@ -8,7 +8,7 @@ export default class ControlPanel extends React.Component {
         super(props);
         this.state = {
             controlPanelVisible: false,
-            playing: false
+            playing: false,
         }
     }
 
@@ -26,6 +26,7 @@ export default class ControlPanel extends React.Component {
         } else {
             alert("No file uploaded");
         }
+        this.props.enableShaking(document.getElementById("customSwitch1").checked);
     }
 
     render() {
@@ -53,6 +54,10 @@ export default class ControlPanel extends React.Component {
                     </div>
                     <div className="settings-text my-3 text-uppercase text-secondary">
                         settings
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1"/>
+                        <label class="custom-control-label" for="customSwitch1">Enable shake</label>
                     </div>
                 </div>
                 <div className="control-panel-confirm">

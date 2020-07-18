@@ -10,7 +10,8 @@ export default class LandingPage extends React.Component {
             active: 1,
             uploaded: false,
             isShaking: false,
-            controlPanelVisible: true
+            controlPanelVisible: true,
+            shakeEnabled: false,
         }
     }
 
@@ -26,16 +27,28 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    enableShaking = toggle => {
+        if (toggle) {
+            this.setState({
+                shakeEnabled: true,
+            })
+        } else {
+            this.setState({
+                shakeEnabled: false,
+            })
+        }
+    }
+
     render() {
         return (
-            <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking ? " shake" : "")}>
+            <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
                     <div className="row justify-content-center">
                         <div className="col-6 mt-2">
                             <ControlPanel 
                                 visible={this.state.controlPanelVisible}
                                 toggleVisible={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})} 
                                 changeBackground={this.changeBackground} active={this.state.active}
-                                uploadSong={this.uploadSong}
+                                uploadSong={this.uploadSong} enableShaking={this.enableShaking}
                             />
                         </div>
                     </div>
