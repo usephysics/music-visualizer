@@ -12,12 +12,12 @@
 }
 
 .bar {
-    width: 2.5%;
+    width: 2.925%;
     background: rgba(255,255,255,0.3);
     border-radius: 5px 5px 0px 0px;
     height: 100%;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 0.1%;
+    margin-right: 0.1%;
     height: 100%;
     position: relative;
     bottom: 0;
@@ -26,19 +26,20 @@
 }
 
 .shake {
-    animation: shake 100ms linear both;
+    animation: shake 200ms linear both infinite;
   }
   
   @keyframes shake {
     0% {
-      transform: rotate(0deg);
+      transform: scale(1.00);
     }
     
     35%{
-      transform: rotate(2deg);
+      transform: scale(1.05);
     }
-  
-    75% {
-      transform: rotate(-2deg);
+
+    75%{
+      transform: scale(1.00);
     }
+
   }

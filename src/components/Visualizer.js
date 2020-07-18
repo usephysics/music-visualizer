@@ -38,26 +38,19 @@ export default class Visualizer extends React.Component {
 
     componentDidMount(){
         if (!this.state.song.ended){
-            setInterval(this.updateDA, 15);
+            setInterval(this.updateDA, 50);
         } else {
             //bring back control panel
         }
     }
 
     render() {
-        let rightArr = [];
-        for (let i = 16; i > 0; i--) {
-            rightArr.push(i);
-        }
         return(
             <div className="visualizer">
                 <div className="bars">
                     <div className="hidden-bar"></div>
-                    {[...Array(21)].map((e, i) => {
-                        return <Bar height={i < 16 ? this.state.dataArray[i * 24] / 3 : 0} rgb={this.state.color}/>
-                    })}
-                    {rightArr.map((e, i) => {
-                        return <Bar height={this.state.dataArray[rightArr[i] * 12] / 3} rgb={this.state.color}/>
+                    {[...Array(32)].map((e, i) => {
+                        return <Bar height={10 + this.state.dataArray[i * 24] / 3} rgb={this.state.color}/>
                     })}
                 </div>
             </div>

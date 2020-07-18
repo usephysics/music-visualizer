@@ -28,8 +28,7 @@ export default class LandingPage extends React.Component {
 
     render() {
         return (
-            <div className={`container-fluid bg${this.state.active}`}>
-                <div style={{height:"100vh"}} className={this.state.isShaking ? " shake" : ""}>
+            <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking ? " shake" : "")}>
                     <div className="row justify-content-center">
                         <div className="col-6 mt-2">
                             <ControlPanel 
@@ -43,7 +42,6 @@ export default class LandingPage extends React.Component {
                     <div className="row">
                         {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}/> : ""}
                     </div>
-                </div>
 
                 <div 
                     className="show-control-panel-button" style={{display: (!this.state.controlPanelVisible ? "block" : "none")}}
