@@ -6,7 +6,7 @@ export default class Visualizer extends React.Component {
     constructor(props) {
         super(props);
         let file = document.getElementById("file").files[0];
-        const freqRange = [20, 60, 250, 500, 2000, 4000, 6000, 20000];
+        // const freqRange = [20, 60, 250, 500, 2000, 4000, 6000, 20000];
         const audioCtx = new AudioContext();
         const song = new Audio(URL.createObjectURL(file));
         song.play();
@@ -16,7 +16,13 @@ export default class Visualizer extends React.Component {
         const audioSourceNode = audioCtx.createMediaElementSource(song);
         audioSourceNode.connect(analyserNode);
         analyserNode.connect(audioCtx.destination);
-        this.state = {analyser: analyserNode, dataArray: dataArr, shake: false, song: song, songfile: file}
+        this.state = {
+            analyser: analyserNode, 
+            dataArray: dataArr, 
+            shake: false, 
+            song: song, 
+            songfile: file
+        }
     }
 
     updateDA = () => {
@@ -31,23 +37,27 @@ export default class Visualizer extends React.Component {
     }
 
     componentDidMount(){
-        if(!this.state.song.ended){
-            setInterval(this.updateDA, 50);
-        }else{
+        if (!this.state.song.ended){
+            setInterval(this.updateDA, 15);
+        } else {
             //bring back control panel
         }
     }
 
     render() {
+        let rightArr = [];
+        for (let i = 16; i > 0; i--) {
+            rightArr.push(i);
+        }
         return(
             <div className="visualizer">
-                <div className="track-info">
-                    <p>Now playing: {this.state.songfile.name}</p>
-                </div>
                 <div className="bars">
                     <div className="hidden-bar"></div>
-                    {[...Array(32)].map((e, i) => {
-                        return <Bar height={this.state.dataArray[i*i]/5} rgb={this.state.color}/>
+                    {[...Array(21)].map((e, i) => {
+                        return <Bar height={i < 16 ? this.state.dataArray[i * 24] / 3 : 0} rgb={this.state.color}/>
+                    })}
+                    {rightArr.map((e, i) => {
+                        return <Bar height={this.state.dataArray[rightArr[i] * 12] / 3} rgb={this.state.color}/>
                     })}
                 </div>
             </div>

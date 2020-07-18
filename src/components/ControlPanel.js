@@ -7,7 +7,8 @@ export default class ControlPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            controlPanelVisible: false
+            controlPanelVisible: false,
+            playing: false
         }
     }
 
@@ -16,10 +17,13 @@ export default class ControlPanel extends React.Component {
     }
 
     confirm = () => {
-        if(document.getElementById("file").files.length == 1){
+        if(document.getElementById("file").files.length === 1){
             this.props.uploadSong();
             this.props.toggleVisible();
-        }else{
+            this.setState({
+                playing: true
+            })
+        } else {
             alert("No file uploaded");
         }
     }
@@ -39,7 +43,7 @@ export default class ControlPanel extends React.Component {
                     <div className="choose-background-text mt-3 mb-3 text-uppercase text-secondary">
                         choose a background
                     </div>
-                    <div className="carousel mx-auto">
+                    <div className="carousel mx-auto mb-4">
                         <Slider {...settings}>
                             {Array(6).fill(0).map((e,i)=>i+1).map(num =>
                                 <BgChoice num={num} active={this.props.active} 
@@ -47,9 +51,12 @@ export default class ControlPanel extends React.Component {
                             )}
                         </Slider>
                     </div>
+                    <div className="settings-text my-3 text-uppercase text-secondary">
+                        settings
+                    </div>
                 </div>
                 <div className="control-panel-confirm">
-                    <div className="confirm-button mt-4" onClick={this.confirm}>Confirm</div>
+                    <div className="confirm-button mt-4" onClick={this.confirm}>{this.state.playing ? "Confirm" : "Play"}</div>
                 </div>
             </div>
         );

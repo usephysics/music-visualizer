@@ -13,6 +13,8 @@
     width: 700px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
+    z-index: 100;
 }
 
 .control-panel-content {
@@ -95,7 +97,7 @@ label:hover {
     padding-right: 15px;
 }
 
-.choose-background-text {
+.choose-background-text, .settings-text {
     font-size: 18px;
     font-weight: bold;
 }
