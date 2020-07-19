@@ -13,7 +13,7 @@ export default class ControlPanel extends React.Component {
     }
 
     upload = () => {
-        document.getElementById("file-name").innerHTML = document.getElementById("file").files[0].name;
+        if (document.getElementById("file").files[0]) document.getElementById("file-name").innerHTML = document.getElementById("file").files[0].name;
     }
 
     confirm = () => {
@@ -46,7 +46,7 @@ export default class ControlPanel extends React.Component {
                     </div>
                     <div className="carousel mx-auto mb-4">
                         <Slider {...settings}>
-                            {Array(6).fill(0).map((e,i)=>i+1).map(num =>
+                            {Array(9).fill(0).map((e,i)=>i+1).map(num =>
                                 <BgChoice num={num} active={this.props.active} 
                                 changeBackground={this.props.changeBackground}/>
                             )}
