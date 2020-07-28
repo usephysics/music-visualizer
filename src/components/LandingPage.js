@@ -28,20 +28,15 @@ export default class LandingPage extends React.Component {
     }
 
     enableShaking = toggle => {
-        if (toggle) {
-            this.setState({
-                shakeEnabled: true,
-            })
-        } else {
-            this.setState({
-                shakeEnabled: false,
-            })
-        }
+        this.setState({
+            shakeEnabled: toggle,
+        })
     }
 
     songEnded = () => {
         this.setState({
             controlPanelVisible: true,
+            uploaded: false
         })
     }
 
@@ -52,7 +47,7 @@ export default class LandingPage extends React.Component {
                         <div className="col-6 mt-2">
                             <ControlPanel 
                                 visible={this.state.controlPanelVisible}
-                                toggleVisible={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})} 
+                                toggleVisible={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})}
                                 changeBackground={this.changeBackground} active={this.state.active}
                                 uploadSong={this.uploadSong} enableShaking={this.enableShaking}
                             />
@@ -60,7 +55,7 @@ export default class LandingPage extends React.Component {
                     </div>
                     <div className="row">
                         {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}
-                        songEnded={this.songEnded}/> : ""}
+                        songEnded={this.songEnded} /> : ""}
                     </div>
                 <div 
                     className="show-control-panel-button" style={{display: (!this.state.controlPanelVisible ? "block" : "none")}}
