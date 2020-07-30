@@ -36,25 +36,26 @@ export default class Visualizer extends React.Component {
         let sumOfFreqs = 0;
         let analyser = this.state.analyser;
         let dataArr = this.state.dataArray;
-        //console.log(dataArr);
         analyser.getByteFrequencyData(dataArr);
-        let scalingArr = [...Array(32)]
         for (let i = 1; i <= 32; i++) {
-            sumOfFreqs += dataArr[i * 12] * scalingArr[i];
+            sumOfFreqs += dataArr[i * 12];
         }
-        this.props.setShaking(dataArr.subarray(4,8).reduce((total, next) => total += next) / 4 > 210);
-        /*if(this.state.shakeTimer == 0 && dataArr.subarray(4,8).reduce((total, next) => total += next) / 4 > 210){
+        this.props.setShaking(dataArr.subarray(4,8).reduce((total, next) => total += next) / 4 > 235);
+        
+        /*
+        if (this.state.shakeTimer === 0 && dataArr.subarray(4,8).reduce((total, next) => total += next) / 4 > 210) {
             this.props.setShaking(true); //enable/disable shaking animation
-            this.state.shakeTimer = 10;
-        }else if(this.state.shakeTimer == 9){
+            this.setState({
+                shakeTimer: 10
+            })
+        } else if(this.state.shakeTimer === 9) {
             this.props.setShaking(false);
-            
-        }
-        this.state.shakeTimer = this.state.shakeTimer == 0 ? 0 : this.state.shakeTimer-1;*/
+        } */
         this.setState({
             analyser: analyser, 
             dataArray: dataArr,
-            volume: sumOfFreqs / 3840
+            volume: sumOfFreqs / 3840,
+            // shakeTimer: this.state.shakeTimer === 0 ? 0 : (this.state.shakeTimer) - 1,
         });
     }
 
@@ -63,18 +64,19 @@ export default class Visualizer extends React.Component {
             songInterval = setInterval(this.updateDA, 50);
         }
     }
-
+    
     render() {
         return(
             <div className="visualizer">
                 <div className="bars">
                     <div className="hidden-bar"></div>
                     {[...Array(33)].map((e, i) => {
-                        let factorArr = [6,3,4.5,3,2,3,3.5,3]
-                        let factor = factorArr[i%8]*1.2;
-                        i = i > 16 ? i - 2*(i%16) + 1 : i + 1;
-                        i = i==33 ? 1 : i;
-                        return <Bar height={this.state.dataArray.subarray(Math.floor(i*i/2), Math.floor(i*i/2)+Math.ceil(i/4+0.01)).reduce((total, next) => total += next)/(Math.ceil(i/4+0.01)*5)}/>
+                        // let factorArr = [6,3,4.5,3,2,3,3.5,3]
+                        // let factor = factorArr[i % 8] * 1.2;
+                        i = i > 16 ? i - 2 * (i % 16) + 1 : i + 1;
+                        i = i === 33 ? 1 : i;
+                        return <Bar height={this.state.dataArray.subarray(Math.floor(i*i/2), Math.floor(i*i/2)+Math.ceil(i/4+0.01)).reduce((total, next) => 
+                            total += next)/(Math.ceil(i/4+0.01)*3) * (Math.pow(this.state.volume, 2.5) / 1.6)}/>
                     })}
                 </div>
             </div>
