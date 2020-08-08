@@ -44,6 +44,8 @@ export default class AudioPlayer extends React.Component {
         this.props.audio.currentTime = ((e.pageX - this.timeline.offsetLeft) / this.timeline.offsetWidth) * this.props.audio.duration;
         this.props.audio.play();
         this.setState({ playing: true });
+        window.addEventListener('mousemove', this.mouseMove);
+        window.addEventListener('mouseup', this.mouseUp);
     };
 
     mouseUp = (e) => {
@@ -72,7 +74,7 @@ export default class AudioPlayer extends React.Component {
         let minutes = (timeLeft - seconds) / 60
         return <div className="audio-player">
             <div className="play-pause-btn" onClick={this.play}>{this.state.playing ? <FontAwesomeIcon icon={faPause} /> : <FontAwesomeIcon icon={faPlay} />}</div>
-            <div className="timeline" onClick={this.mouseMove} ref={(timeline) => { this.timeline = timeline }}>
+            <div className="timeline" onMouseUp={this.mouseUp} onMouseDown={this.mouseMove} ref={(timeline) => { this.timeline = timeline }}>
                 <div className="line"></div>
                 <div className="handle" onMouseDown={this.mouseDown} ref={(handle) => { this.handle = handle }} />
             </div>
