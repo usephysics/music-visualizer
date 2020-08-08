@@ -52,8 +52,21 @@
     padding: 3px;
 }
 
+.timeline-time {
+    background: white;
+    height: 40px;
+    width: 53px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    padding: 8px;
+    color: grey;
+    position: relative;
+    z-index: 100000;
+}
+
 .audio-player {
-    margin-left: calc(50vw - 220px);
+    margin-left: calc(50vw - 246px);
     margin-top: 20px;
     z-index: 100000;
 }
