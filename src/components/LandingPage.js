@@ -2,6 +2,7 @@ import React from 'react';
 import ControlPanel from './ControlPanel.js';
 import Visualizer from './Visualizer.js';
 import '../css/LandingPage.css';
+import AudioPlayer from './AudioPlayer.js';
 
 export default class LandingPage extends React.Component {
     constructor(props) {
@@ -43,24 +44,24 @@ export default class LandingPage extends React.Component {
     render() {
         return (
             <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
-                    <div className="row justify-content-center">
-                        <div className="col-6 mt-2">
-                            <ControlPanel 
-                                visible={this.state.controlPanelVisible}
-                                toggleVisible={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})}
-                                changeBackground={this.changeBackground} active={this.state.active}
-                                uploadSong={this.uploadSong} enableShaking={this.enableShaking}
-                            />
-                        </div>
+                <div className="row justify-content-center">
+                    <div className="col-6 mt-2">
+                        <ControlPanel
+                            visible={this.state.controlPanelVisible}
+                            toggleVisible={() => this.setState({ controlPanelVisible: !this.state.controlPanelVisible })}
+                            changeBackground={this.changeBackground} active={this.state.active}
+                            uploadSong={this.uploadSong} enableShaking={this.enableShaking}
+                        />
                     </div>
-                    <div className="row">
-                        {this.state.uploaded ? <Visualizer setShaking={(isShaking) => this.setState({isShaking})}
+                </div>
+                <div className="row">
+                    {this.state.uploaded ? <Visualizer controlPanelVisible={this.state.controlPanelVisible} setShaking={(isShaking) => this.setState({ isShaking })}
                         songEnded={this.songEnded} /> : ""}
-                    </div>
-                <div 
-                    className="show-control-panel-button" style={{display: (!this.state.controlPanelVisible ? "block" : "none")}}
-                    onClick={() => this.setState({controlPanelVisible: !this.state.controlPanelVisible})}
-                 />       
+                </div>
+                <div
+                    className="show-control-panel-button" style={{ display: (!this.state.controlPanelVisible ? "block" : "none") }}
+                    onClick={() => this.setState({ controlPanelVisible: !this.state.controlPanelVisible })}
+                />
             </div>
         );
     }

@@ -1,0 +1,59 @@
+.timeline{
+    width: 400px;
+    height: 40px;
+    background: white;  
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.handle{
+	width: 15px;
+	height: 15px;
+    background: #4c2191;
+    border-radius: 50%;
+    position: relative;
+    z-index: 10000000;
+    margin-top: 9px;
+}
+
+.line {
+    background: #cccccc;
+    height: 3px;
+    width: 100%;
+    position: relative;
+    z-index: 100000;
+    top: calc(50% - 1.5px);
+    transition: 100ms ease all;
+}
+
+.timeline:hover .line {
+    background: #4c2191;
+}
+
+.play-pause-btn {
+    display:inline-block;
+    width: 40px;
+    height: 40px;
+    background: #4c2191;
+    color: white;
+    vertical-align: middle;
+    font-size: 20px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 1000000;
+    transition: 100ms ease all;
+}
+
+.play-pause-btn:hover {
+    font-size: 22px;
+    padding: 3px;
+}
+
+.audio-player {
+    margin-left: calc(50vw - 220px);
+    margin-top: 20px;
+    z-index: 100000;
+}
