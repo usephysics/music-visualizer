@@ -1,7 +1,7 @@
 import React from 'react';
 import Bar from './Bars/Bar.js';
-import '../css/Visualizer.css';
 import AudioPlayer from './AudioPlayer.js';
+import '../css/Visualizer.css';
 
 var songInterval;
 
@@ -10,10 +10,10 @@ export default class Visualizer extends React.Component {
         super(props);
         const file = document.getElementById("file").files[0];
         const song = new Audio(URL.createObjectURL(file));
-        song.play();
         const audioCtx = new AudioContext();
         const analyserNode = audioCtx.createAnalyser();
         const audioSourceNode = audioCtx.createMediaElementSource(song);
+        song.play();
         audioSourceNode.connect(analyserNode);
         analyserNode.fftSize = 2048;
         analyserNode.connect(audioCtx.destination);
@@ -25,7 +25,6 @@ export default class Visualizer extends React.Component {
             song: song,
             songfile: file,
             volume: 0,
-            //shakeTimer: 0
         }
     }
 
@@ -41,7 +40,7 @@ export default class Visualizer extends React.Component {
         for (let i = 1; i <= 32; i++) {
             sumOfFreqs += dataArr[i * 12];
         }
-        this.props.setShaking(dataArr.subarray(4, 8).reduce((total, next) => total += next) / 4 > 235);
+        this.props.setShaking(dataArr.subarray(4, 8).reduce((total, next) => total += next) / 4 > 240);
 
         /*
         if (this.state.shakeTimer === 0 && dataArr.subarray(4,8).reduce((total, next) => total += next) / 4 > 210) {
@@ -74,12 +73,14 @@ export default class Visualizer extends React.Component {
                     <div className="bars">
                         <div className="hidden-bar"></div>
                         {[...Array(33)].map((e, i) => {
-                            // let factorArr = [6,3,4.5,3,2,3,3.5,3]
+                            // let factorArr = [6,3,4.5,3,2,3,3.5,3];
                             // let factor = factorArr[i % 8] * 1.2;
                             i = i > 16 ? i - 2 * (i % 16) + 1 : i + 1;
                             i = i === 33 ? 1 : i;
-                            return <Bar height={this.state.dataArray.subarray(Math.floor(i * i / 2), Math.floor(i * i / 2) + Math.ceil(i / 4 + 0.01)).reduce((total, next) =>
-                                total += next) / (Math.ceil(i / 4 + 0.01) * 3) * (Math.pow(this.state.volume, 2.5) / 1.6)} />
+                            return <Bar height={(this.props.lowerBars ? 0.65 : 1) *
+                                this.state.dataArray.subarray(Math.floor(i * i / 2), Math.floor(i * i / 2) + 4).reduce((total, next) => 
+                                total += next) * Math.pow(this.state.volume, 2.5) / 19.2} colorsEnabled={this.props.colorsEnabled}
+                                totalVolume={this.state.volume}/>
                         })}
                     </div>
                 </div>
