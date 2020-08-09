@@ -39,6 +39,7 @@ export default class ControlPanel extends React.Component {
         this.props.enableShaking(document.getElementById("shakeSwitch").checked);
         this.props.enableColors(document.getElementById("colorSwitch").checked);
         this.props.enableLowerBars(document.getElementById("lowerBarSwitch").checked);
+        this.props.enableRemoveBars(document.getElementById("removeBarsSwitch").checked);
     }
 
     render() {
@@ -81,6 +82,12 @@ export default class ControlPanel extends React.Component {
                         <div class="col custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="lowerBarSwitch"/>
                             <label class="custom-control-label" for="lowerBarSwitch">Lower bars</label>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="removeBarsSwitch"/>
+                            <label class="custom-control-label" for="removeBarsSwitch">Remove center bars</label>
                         </div>
                     </div>
                     {epilepsy}

@@ -10,10 +10,15 @@ export default class Bar extends React.Component {
         return `rgba(${factor * 0.3 + offset}, ${factor * 1.5 + offset}, ${factor + offset}, 0.8)`;
     }
 
+    getHeight = () => {
+        if (this.props.index >= 12 && this.props.index <= 19 && this.props.removeCenter) return "0%"
+        return this.props.height + "%"
+    }
+
     render() {
         return(
             <div className="bar" style={{
-                height: this.props.height + "%", 
+                height: this.getHeight(), 
                 transition: "all ms ease",
                 backgroundColor: this.getColors(),
             }}></div>

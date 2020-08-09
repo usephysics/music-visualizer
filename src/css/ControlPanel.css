@@ -104,7 +104,7 @@ label:hover {
 
 .control-panel-hidden {
     transition: 250ms ease all;
-    transform: translateY(-43vh)  scale(0.1);
+    transform: translateY(-50vh)  scale(0.1);
 }
 
 .show-control-panel-button {

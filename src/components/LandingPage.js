@@ -15,6 +15,7 @@ export default class LandingPage extends React.Component {
             shakeEnabled: false,
             colors: false,
             lowerBars: false,
+            removeBars: false,
         }
     }
 
@@ -55,6 +56,12 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    enableRemoveBars = toggle => {
+        this.setState({
+            removeBars: toggle,
+        })
+    }
+
     render() {
         return (
             <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
@@ -65,13 +72,13 @@ export default class LandingPage extends React.Component {
                             toggleVisible={() => this.setState({ controlPanelVisible: !this.state.controlPanelVisible })}
                             changeBackground={this.changeBackground} active={this.state.active}
                             uploadSong={this.uploadSong} enableShaking={this.enableShaking} enableColors={this.enableColors}
-                            enableLowerBars={this.enableLowerBars}
+                            enableLowerBars={this.enableLowerBars} enableRemoveBars={this.enableRemoveBars}
                         />
                     </div>
                 </div>
                 <div className="row">
                     {this.state.uploaded ? <Visualizer controlPanelVisible={this.state.controlPanelVisible} setShaking={(isShaking) => this.setState({ isShaking })}
-                        songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars}/> : ""}
+                        songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars} removeCenter={this.state.removeBars}/> : ""}
                 </div>
                 <div
                     className="show-control-panel-button" style={{ display: (!this.state.controlPanelVisible ? "block" : "none") }}

@@ -75,12 +75,13 @@ export default class Visualizer extends React.Component {
                         {[...Array(33)].map((e, i) => {
                             // let factorArr = [6,3,4.5,3,2,3,3.5,3];
                             // let factor = factorArr[i % 8] * 1.2;
+                            let originalIndex = i;
                             i = i > 16 ? i - 2 * (i % 16) + 1 : i + 1;
                             i = i === 33 ? 1 : i;
                             return <Bar height={(this.props.lowerBars ? 0.65 : 1) *
                                 this.state.dataArray.subarray(Math.floor(i * i / 2), Math.floor(i * i / 2) + 4).reduce((total, next) => 
                                 total += next) * Math.pow(this.state.volume, 2.5) / 19.2} colorsEnabled={this.props.colorsEnabled}
-                                totalVolume={this.state.volume}/>
+                                totalVolume={this.state.volume} index={originalIndex} removeCenter={this.props.removeCenter}/>
                         })}
                     </div>
                 </div>
