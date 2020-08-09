@@ -2,7 +2,7 @@ import React from 'react';
 import ControlPanel from './ControlPanel.js';
 import Visualizer from './Visualizer.js';
 import '../css/LandingPage.css';
-import AudioPlayer from './AudioPlayer.js';
+// import AudioPlayer from './AudioPlayer.js';
 
 export default class LandingPage extends React.Component {
     constructor(props) {
@@ -13,6 +13,8 @@ export default class LandingPage extends React.Component {
             isShaking: false,
             controlPanelVisible: true,
             shakeEnabled: false,
+            colors: false,
+            lowerBars: false,
         }
     }
 
@@ -41,6 +43,18 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    enableColors = toggle => {
+        this.setState({
+            colors: toggle,
+        })
+    }
+
+    enableLowerBars = toggle => {
+        this.setState({
+            lowerBars: toggle,
+        })
+    }
+
     render() {
         return (
             <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
@@ -50,13 +64,14 @@ export default class LandingPage extends React.Component {
                             visible={this.state.controlPanelVisible}
                             toggleVisible={() => this.setState({ controlPanelVisible: !this.state.controlPanelVisible })}
                             changeBackground={this.changeBackground} active={this.state.active}
-                            uploadSong={this.uploadSong} enableShaking={this.enableShaking}
+                            uploadSong={this.uploadSong} enableShaking={this.enableShaking} enableColors={this.enableColors}
+                            enableLowerBars={this.enableLowerBars}
                         />
                     </div>
                 </div>
                 <div className="row">
                     {this.state.uploaded ? <Visualizer controlPanelVisible={this.state.controlPanelVisible} setShaking={(isShaking) => this.setState({ isShaking })}
-                        songEnded={this.songEnded} /> : ""}
+                        songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars}/> : ""}
                 </div>
                 <div
                     className="show-control-panel-button" style={{ display: (!this.state.controlPanelVisible ? "block" : "none") }}

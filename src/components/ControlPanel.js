@@ -11,11 +11,19 @@ export default class ControlPanel extends React.Component {
         this.state = {
             controlPanelVisible: false,
             playing: false,
+            colorToggle: false,
         }
     }
 
+    handleChange = e => {
+        this.setState({colorToggle: !this.state.colorToggle});
+    }
+
     upload = () => {
-        if (document.getElementById("file").files[0]) document.getElementById("file-name").innerHTML = document.getElementById("file").files[0].name;
+        if (document.getElementById("file").files[0]) {
+            let fileName = document.getElementById("file").files[0].name;
+            document.getElementById("file-name").innerHTML = fileName.replace(/\.[^/.]+$/, "");
+        }
     }
 
     confirm = () => {
@@ -28,7 +36,9 @@ export default class ControlPanel extends React.Component {
         } else {
             alert("No file uploaded");
         }
-        this.props.enableShaking(document.getElementById("customSwitch1").checked);
+        this.props.enableShaking(document.getElementById("shakeSwitch").checked);
+        this.props.enableColors(document.getElementById("colorSwitch").checked);
+        this.props.enableLowerBars(document.getElementById("lowerBarSwitch").checked);
     }
 
     render() {
@@ -38,11 +48,13 @@ export default class ControlPanel extends React.Component {
             slidesToShow: 3,
             slidesToScroll: 3,
         };
+        let epilepsy = this.state.colorToggle ? <div class="font-weight-bold mt-4">EPILEPSY WARNING: ENABLING COLORS MAY CREATE FLASHING LIGHTS</div> : null;
         return (
             <div className={"control-panel " + (!this.props.visible ? "control-panel-hidden" : "")} id="panel">
                 <div className="control-panel-content">
                     <input type="file" name="file" id="file" accept="audio/*" onChange={this.upload} />
-                    <label className="upload-button" for="file"><FontAwesomeIcon icon={faUpload} /> &nbsp;&nbsp;Upload song</label><div id="file-name" className="file-name-text">No file chosen</div>
+                    <label className="upload-button" for="file"><FontAwesomeIcon icon={faUpload} /> &nbsp;&nbsp;Upload song</label>
+                    <div id="file-name" className="file-name-text">No file chosen</div>
                     <div className="choose-background-text mt-3 mb-3 text-uppercase text-secondary">
                         choose a background
                     </div>
@@ -50,20 +62,31 @@ export default class ControlPanel extends React.Component {
                         <Slider {...settings}>
                             {Array(9).fill(0).map((e, i) => i + 1).map(num =>
                                 <BgChoice num={num} active={this.props.active}
-                                    changeBackground={this.props.changeBackground} />
+                                    changeBackground={this.props.changeBackground}/>
                             )}
                         </Slider>
                     </div>
                     <div className="settings-text my-3 text-uppercase text-secondary">
                         settings
                     </div>
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch1" />
-                        <label class="custom-control-label" for="customSwitch1">Enable shake</label>
+                    <div class="row">
+                        <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="shakeSwitch"/>
+                            <label class="custom-control-label" for="shakeSwitch">Enable shake</label>
+                        </div>
+                        <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="colorSwitch" onChange={(e) => this.handleChange(e)}/>
+                            <label class="custom-control-label" for="colorSwitch">Enable colors</label>
+                        </div>
+                        <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="lowerBarSwitch"/>
+                            <label class="custom-control-label" for="lowerBarSwitch">Lower bars</label>
+                        </div>
                     </div>
+                    {epilepsy}
                 </div>
                 <div className="control-panel-confirm">
-                    <div className="confirm-button mt-4" onClick={this.confirm}>{this.state.playing ? "Confirm" : "Play"}</div>
+                    <div className="confirm-button mt-2" onClick={this.confirm}>{this.state.playing ? "Confirm" : "Play"}</div>
                 </div>
             </div>
         );
