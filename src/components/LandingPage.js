@@ -3,6 +3,8 @@ import ControlPanel from './ControlPanel.js';
 import Visualizer from './Visualizer.js';
 import '../css/LandingPage.css';
 
+/* This component renders the page and maintains most state */
+
 export default class LandingPage extends React.Component {
     constructor(props) {
         super(props);
@@ -18,6 +20,7 @@ export default class LandingPage extends React.Component {
             gradient: false,
             stop: false,
             secondary: false,
+            // Initialize custom settings, the background, and the control panel
         }
     }
 
@@ -76,6 +79,7 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    // The below 2 functions are used to force stop a song when a new file is uploaded
     stopSong = () => {
         this.setState({
             stop: true,
@@ -90,6 +94,7 @@ export default class LandingPage extends React.Component {
 
     render() {
         return (
+            // Entire screen shakes from the shake effect
             <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
                 <div className="row justify-content-center">
                     <div className="col-6 mt-2">

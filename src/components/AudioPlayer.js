@@ -4,8 +4,9 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 import { faPause } from '@fortawesome/free-solid-svg-icons'
 import '../css/AudioPlayer.css';
 
-export default class AudioPlayer extends React.Component {
+/* This component renders the playback controls when a song is playing */
 
+export default class AudioPlayer extends React.Component {
     constructor(props) {
         super(props);
         this.state = { playing: true };
