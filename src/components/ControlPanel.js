@@ -72,7 +72,7 @@ export default class ControlPanel extends React.Component {
                     </div>
                     <div className="carousel mx-auto mb-4">
                         <Slider {...settings}>
-                            {Array(9).fill(0).map((e, i) => i + 1).map(num =>
+                            {Array(4).fill(0).map((e, i) => i + 1).map(num =>
                                 <BgChoice num={num} active={this.props.active}
                                     changeBackground={this.props.changeBackground}/>
                             )}
