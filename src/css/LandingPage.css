@@ -15,7 +15,7 @@
     background-image: url('../backgrounds/1.jpeg');
 }
 
-/* will have about 25 available backgrounds as gifs. naming convention will simply be "bg" + n" */
+/* 9 available backgrounds as gifs. naming convention is simply "bg" + n */
 .bg2 {
     background-image: url('../backgrounds/2.gif');
 }

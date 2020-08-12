@@ -41,21 +41,10 @@ export default class Visualizer extends React.Component {
             sumOfFreqs += dataArr[i * 12];
         }
         this.props.setShaking(dataArr.subarray(4, 8).reduce((total, next) => total += next) / 4 > 240);
-
-        /*
-        if (this.state.shakeTimer === 0 && dataArr.subarray(4,8).reduce((total, next) => total += next) / 4 > 210) {
-            this.props.setShaking(true); //enable/disable shaking animation
-            this.setState({
-                shakeTimer: 10
-            })
-        } else if(this.state.shakeTimer === 9) {
-            this.props.setShaking(false);
-        } */
         this.setState({
             analyser: analyser,
             dataArray: dataArr,
             volume: sumOfFreqs / 3840,
-            // shakeTimer: this.state.shakeTimer === 0 ? 0 : (this.state.shakeTimer) - 1,
         });
     }
 
@@ -73,15 +62,14 @@ export default class Visualizer extends React.Component {
                     <div className="bars">
                         <div className="hidden-bar"></div>
                         {[...Array(33)].map((e, i) => {
-                            // let factorArr = [6,3,4.5,3,2,3,3.5,3];
-                            // let factor = factorArr[i % 8] * 1.2;
                             let originalIndex = i;
                             i = i > 16 ? i - 2 * (i % 16) + 1 : i + 1;
                             i = i === 33 ? 1 : i;
-                            return <Bar height={(this.props.lowerBars ? 0.65 : 1) *
+                            return <Bar height={
                                 this.state.dataArray.subarray(Math.floor(i * i / 2), Math.floor(i * i / 2) + 4).reduce((total, next) => 
                                 total += next) * Math.pow(this.state.volume, 2.5) / 19.2} colorsEnabled={this.props.colorsEnabled}
-                                totalVolume={this.state.volume} index={originalIndex} removeCenter={this.props.removeCenter}/>
+                                totalVolume={this.state.volume} index={originalIndex} removeCenter={this.props.removeCenter}
+                                gradientEnabled={this.props.gradientEnabled} i={i} lowerBars={this.props.lowerBars}/>
                         })}
                     </div>
                 </div>

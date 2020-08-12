@@ -40,6 +40,7 @@ export default class ControlPanel extends React.Component {
         this.props.enableColors(document.getElementById("colorSwitch").checked);
         this.props.enableLowerBars(document.getElementById("lowerBarSwitch").checked);
         this.props.enableRemoveBars(document.getElementById("removeBarsSwitch").checked);
+        this.props.enableGradient(document.getElementById("gradientSwitch").checked);
     }
 
     render() {
@@ -49,7 +50,7 @@ export default class ControlPanel extends React.Component {
             slidesToShow: 3,
             slidesToScroll: 3,
         };
-        let epilepsy = this.state.colorToggle ? <div class="font-weight-bold mt-4">EPILEPSY WARNING: ENABLING COLORS MAY CREATE FLASHING LIGHTS</div> : null;
+        let epilepsy = this.state.colorToggle ? <div class="font-weight-bold mt-4">EPILEPSY WARNING: ENABLING COLOR CHANGE MAY CREATE FLASHING LIGHTS</div> : null;
         return (
             <div className={"control-panel " + (!this.props.visible ? "control-panel-hidden" : "")} id="panel">
                 <div className="control-panel-content">
@@ -72,22 +73,26 @@ export default class ControlPanel extends React.Component {
                     </div>
                     <div class="row">
                         <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="colorSwitch" onChange={(e) => this.handleChange(e)}/>
+                            <label class="custom-control-label" for="colorSwitch">Enable color change</label>
+                        </div>
+                        <div class="col custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="shakeSwitch"/>
                             <label class="custom-control-label" for="shakeSwitch">Enable shake</label>
                         </div>
                         <div class="col custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="colorSwitch" onChange={(e) => this.handleChange(e)}/>
-                            <label class="custom-control-label" for="colorSwitch">Enable colors</label>
-                        </div>
-                        <div class="col custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="lowerBarSwitch"/>
-                            <label class="custom-control-label" for="lowerBarSwitch">Lower bars</label>
+                            <input type="checkbox" class="custom-control-input" id="gradientSwitch"/>
+                            <label class="custom-control-label" for="gradientSwitch">Toggle color gradient</label>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="removeBarsSwitch"/>
                             <label class="custom-control-label" for="removeBarsSwitch">Remove center bars</label>
+                        </div>
+                        <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="lowerBarSwitch"/>
+                            <label class="custom-control-label" for="lowerBarSwitch">Lower bars</label>
                         </div>
                     </div>
                     {epilepsy}

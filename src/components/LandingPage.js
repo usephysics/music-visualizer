@@ -16,6 +16,7 @@ export default class LandingPage extends React.Component {
             colors: false,
             lowerBars: false,
             removeBars: false,
+            gradient: false,
         }
     }
 
@@ -62,6 +63,12 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    enableGradient = toggle => {
+        this.setState({
+            gradient: toggle,
+        })
+    }
+
     render() {
         return (
             <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
@@ -72,13 +79,14 @@ export default class LandingPage extends React.Component {
                             toggleVisible={() => this.setState({ controlPanelVisible: !this.state.controlPanelVisible })}
                             changeBackground={this.changeBackground} active={this.state.active}
                             uploadSong={this.uploadSong} enableShaking={this.enableShaking} enableColors={this.enableColors}
-                            enableLowerBars={this.enableLowerBars} enableRemoveBars={this.enableRemoveBars}
+                            enableLowerBars={this.enableLowerBars} enableRemoveBars={this.enableRemoveBars} enableGradient={this.enableGradient}
                         />
                     </div>
                 </div>
                 <div className="row">
                     {this.state.uploaded ? <Visualizer controlPanelVisible={this.state.controlPanelVisible} setShaking={(isShaking) => this.setState({ isShaking })}
-                        songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars} removeCenter={this.state.removeBars}/> : ""}
+                        songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars} removeCenter={this.state.removeBars}
+                        gradientEnabled={this.state.gradient}/> : ""}
                 </div>
                 <div
                     className="show-control-panel-button" style={{ display: (!this.state.controlPanelVisible ? "block" : "none") }}
