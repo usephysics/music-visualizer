@@ -47,6 +47,7 @@ export default class ControlPanel extends React.Component {
             this.props.enableLowerBars(document.getElementById("lowerBarSwitch").checked);
             this.props.enableRemoveBars(document.getElementById("removeBarsSwitch").checked);
             this.props.enableGradient(document.getElementById("gradientSwitch").checked);
+            this.props.enableSecondary(document.getElementById("secondarySwitch").checked);
         } else {
             alert("No file uploaded");
         }
@@ -98,6 +99,10 @@ export default class ControlPanel extends React.Component {
                         <div class="col custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="removeBarsSwitch"/>
                             <label class="custom-control-label" for="removeBarsSwitch">Remove center bars</label>
+                        </div>
+                        <div class="col custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="secondarySwitch"/>
+                            <label class="custom-control-label" for="secondarySwitch">Different algorithm</label>
                         </div>
                         <div class="col custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="lowerBarSwitch"/>

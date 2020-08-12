@@ -17,6 +17,7 @@ export default class LandingPage extends React.Component {
             removeBars: false,
             gradient: false,
             stop: false,
+            secondary: false,
         }
     }
 
@@ -69,6 +70,12 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    enableSecondary = toggle => {
+        this.setState({
+            secondary: toggle,
+        })
+    }
+
     stopSong = () => {
         this.setState({
             stop: true,
@@ -92,14 +99,14 @@ export default class LandingPage extends React.Component {
                             changeBackground={this.changeBackground} active={this.state.active}
                             uploadSong={this.uploadSong} enableShaking={this.enableShaking} enableColors={this.enableColors}
                             enableLowerBars={this.enableLowerBars} enableRemoveBars={this.enableRemoveBars} enableGradient={this.enableGradient}
-                            stopSong={this.stopSong} removeStop={this.removeStop}
+                            stopSong={this.stopSong} removeStop={this.removeStop} enableSecondary={this.enableSecondary}
                         />
                     </div>
                 </div>
                 <div className="row">
                     {this.state.uploaded ? <Visualizer controlPanelVisible={this.state.controlPanelVisible} setShaking={(isShaking) => this.setState({ isShaking })}
                         songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars} removeCenter={this.state.removeBars}
-                        gradientEnabled={this.state.gradient} stop={this.state.stop}/> : ""}
+                        gradientEnabled={this.state.gradient} stop={this.state.stop} secondary={this.state.secondary}/> : ""}
                 </div>
                 <div
                     className="show-control-panel-button" style={{ display: (!this.state.controlPanelVisible ? "block" : "none") }}
