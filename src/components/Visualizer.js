@@ -33,6 +33,7 @@ export default class Visualizer extends React.Component {
             this.props.songEnded();
             window.clearInterval(songInterval);
         }
+        if (this.props.stop) this.endSong();
         let sumOfFreqs = 0;
         let analyser = this.state.analyser;
         let dataArr = this.state.dataArray;
@@ -54,6 +55,11 @@ export default class Visualizer extends React.Component {
         }
     }
 
+    endSong() {
+        let song = this.state.song;
+        song.currentTime = song.duration;
+    }
+
     render() {
         return (
             <>
@@ -64,12 +70,11 @@ export default class Visualizer extends React.Component {
                         {[...Array(33)].map((e, i) => {
                             let originalIndex = i;
                             i = i > 16 ? i - 2 * (i % 16) + 1 : i + 1;
-                            i = i === 33 ? 1 : i;
                             return <Bar height={
                                 this.state.dataArray.subarray(Math.floor(i * i / 2), Math.floor(i * i / 2) + 4).reduce((total, next) => 
                                 total += next) * Math.pow(this.state.volume, 2.5) / 19.2} colorsEnabled={this.props.colorsEnabled}
                                 totalVolume={this.state.volume} index={originalIndex} removeCenter={this.props.removeCenter}
-                                gradientEnabled={this.props.gradientEnabled} i={i} lowerBars={this.props.lowerBars}/>
+                                gradientEnabled={this.props.gradientEnabled} lowerBars={this.props.lowerBars} i={i}/>
                         })}
                     </div>
                 </div>

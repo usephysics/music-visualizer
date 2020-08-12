@@ -2,7 +2,6 @@ import React from 'react';
 import ControlPanel from './ControlPanel.js';
 import Visualizer from './Visualizer.js';
 import '../css/LandingPage.css';
-// import AudioPlayer from './AudioPlayer.js';
 
 export default class LandingPage extends React.Component {
     constructor(props) {
@@ -17,6 +16,7 @@ export default class LandingPage extends React.Component {
             lowerBars: false,
             removeBars: false,
             gradient: false,
+            stop: false,
         }
     }
 
@@ -69,6 +69,18 @@ export default class LandingPage extends React.Component {
         })
     }
 
+    stopSong = () => {
+        this.setState({
+            stop: true,
+        })
+    }
+
+    removeStop = () => {
+        this.setState({
+            stop: false,
+        })
+    }
+
     render() {
         return (
             <div className={`container-fluid bg${this.state.active}` + (this.state.isShaking && this.state.shakeEnabled ? " shake" : "")}>
@@ -80,13 +92,14 @@ export default class LandingPage extends React.Component {
                             changeBackground={this.changeBackground} active={this.state.active}
                             uploadSong={this.uploadSong} enableShaking={this.enableShaking} enableColors={this.enableColors}
                             enableLowerBars={this.enableLowerBars} enableRemoveBars={this.enableRemoveBars} enableGradient={this.enableGradient}
+                            stopSong={this.stopSong} removeStop={this.removeStop}
                         />
                     </div>
                 </div>
                 <div className="row">
                     {this.state.uploaded ? <Visualizer controlPanelVisible={this.state.controlPanelVisible} setShaking={(isShaking) => this.setState({ isShaking })}
                         songEnded={this.songEnded} colorsEnabled={this.state.colors} lowerBars={this.state.lowerBars} removeCenter={this.state.removeBars}
-                        gradientEnabled={this.state.gradient}/> : ""}
+                        gradientEnabled={this.state.gradient} stop={this.state.stop}/> : ""}
                 </div>
                 <div
                     className="show-control-panel-button" style={{ display: (!this.state.controlPanelVisible ? "block" : "none") }}

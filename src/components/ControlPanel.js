@@ -23,24 +23,33 @@ export default class ControlPanel extends React.Component {
         if (document.getElementById("file").files[0]) {
             let fileName = document.getElementById("file").files[0].name;
             document.getElementById("file-name").innerHTML = fileName.replace(/\.[^/.]+$/, "");
+            if (this.state.playing) {
+                this.setState({
+                    playing: false,
+                })
+                this.props.stopSong();
+                setTimeout(() => {
+                    this.props.removeStop();
+                }, 200);
+            }
         }
     }
 
     confirm = () => {
-        if (document.getElementById("file").files.length >= 1) {
+        if (document.getElementById("file").files.length >= 1 || this.state.playing) {
             this.props.uploadSong();
             this.props.toggleVisible();
             this.setState({
                 playing: true
             })
+            this.props.enableShaking(document.getElementById("shakeSwitch").checked);
+            this.props.enableColors(document.getElementById("colorSwitch").checked);
+            this.props.enableLowerBars(document.getElementById("lowerBarSwitch").checked);
+            this.props.enableRemoveBars(document.getElementById("removeBarsSwitch").checked);
+            this.props.enableGradient(document.getElementById("gradientSwitch").checked);
         } else {
             alert("No file uploaded");
         }
-        this.props.enableShaking(document.getElementById("shakeSwitch").checked);
-        this.props.enableColors(document.getElementById("colorSwitch").checked);
-        this.props.enableLowerBars(document.getElementById("lowerBarSwitch").checked);
-        this.props.enableRemoveBars(document.getElementById("removeBarsSwitch").checked);
-        this.props.enableGradient(document.getElementById("gradientSwitch").checked);
     }
 
     render() {
@@ -82,7 +91,7 @@ export default class ControlPanel extends React.Component {
                         </div>
                         <div class="col custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="gradientSwitch"/>
-                            <label class="custom-control-label" for="gradientSwitch">Toggle color gradient</label>
+                            <label class="custom-control-label" for="gradientSwitch">Enable color gradient</label>
                         </div>
                     </div>
                     <div class="row mt-3">
