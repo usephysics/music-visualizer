@@ -69,9 +69,9 @@ export default class Visualizer extends React.Component {
                     <div className="bars">
                         <div className="hidden-bar"></div>
                         {[...Array(33)].map((e, i) => {
+                            let originalIndex = i;
                             i = i > 16 ? i - 2 * (i % 16) : i + 1; 
                             if (!this.props.secondary) {
-                                let originalIndex = i;
                                 return <Bar height={
                                     this.state.dataArray.subarray(Math.floor(i * i / 2), Math.floor(i * i / 2) + 4).reduce((total, next) => 
                                     total += next) * Math.pow(this.state.volume, 2.5) / 19.2} colorsEnabled={this.props.colorsEnabled}
@@ -84,7 +84,9 @@ export default class Visualizer extends React.Component {
                             return <Bar height={(this.props.lowerBars ? 0.65 : 1) *
                                 this.state.dataArray.subarray(freqList[i],freqList[i+1]).reduce((total, next) => 
                                 total += next)/((freqList[i+1]-freqList[i])*2.75)} colorsEnabled={this.props.colorsEnabled}
-                                totalVolume={this.state.volume / 2 + this.state.sumOfFreqs / 16320} index={i}/>
+                                totalVolume={this.state.volume / 2 + this.state.sumOfFreqs / 16320} i={i}
+                                index={originalIndex} removeCenter={this.props.removeCenter}
+                                gradientEnabled={this.props.gradientEnabled} lowerBars={this.props.lowerBars}/>
                         })}
                     </div>
                 </div>
