@@ -1,3 +1,12 @@
+# Music Visualizer
+Use this [music visualizer](https://usephysics.github.io/music-visualizer/) to listen to music with various aesthetic effects.
+
+![music visualizer](https://i.imgur.com/qR4QZx1.png)
+
+Created fully with Javascript + React. Audio frequency data is analyzed in real time and put through custom algorithms to determine bar heights and colours.
+
+# Usage
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
