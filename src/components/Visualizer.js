@@ -16,6 +16,7 @@ export default class Visualizer extends React.Component {
         const audioCtx = new AudioContext();
         const analyserNode = audioCtx.createAnalyser();
         const audioSourceNode = audioCtx.createMediaElementSource(song);
+        song.volume = 0.2;
         song.play();
         audioSourceNode.connect(analyserNode);
         analyserNode.fftSize = 2048;
